@@ -1,0 +1,8 @@
+.Menu {
+    list-style: none;
+    margin: 0;
+    
+    position: fixed;
+    background-color: rgb(242, 244, 246);
+    width: 100%;
+}

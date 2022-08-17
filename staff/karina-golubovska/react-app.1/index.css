@@ -1,0 +1,221 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+SC:wght@300&display=swap');
+
+/* resets */
+
+* {
+    font-family: Lato;
+}
+
+html, body {
+    height: 100%;
+    
+}
+.div {
+    display: flex;
+    text-align: center;
+    gap: 3px;
+    color: white;
+
+}
+
+body {
+    margin: 0%;
+    background-color:#8a8585;
+    color: white;
+    
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.container--full {
+    height: 100%;
+}
+
+.container--row {
+    flex-direction: row;
+}
+
+.container--spaced {
+    gap: 50px;
+}
+
+.container--distributed {
+    justify-content: space-between;
+}
+.title {
+    height: 50px;
+    width: 100%;
+    /* background-color: rgb(84, 83, 83); */
+    margin: 0%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header {
+    display: flex;
+    /* height: 50px;
+    flex-shrink: 0;*/
+    background-color: #413c3c; 
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 400px;
+    width: 300px;
+     background-color: transparent; 
+    border: 1px solid white; 
+}
+
+.form__field {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.input {
+    background-color: transparent;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 1px solid white;
+    color: white;
+    font-size: 1rem;
+    caret-color: white;
+
+    outline: none;
+    /* -webkit-box-shadow: 0 0 30px white inset; */
+
+    width: 200px;
+}
+
+.input:-webkit-autofill {
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: white;
+}
+
+.input::selection {
+    background-color: white;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: dodgerblue;
+}
+
+.input::placeholder {
+    color: transparent;
+}
+
+.input:focus {
+    outline: none;
+}
+
+.button {
+    background-color: transparent;
+    border: 1px solid white;
+    padding: 5px;
+    color: white;
+    font-size: 1rem;
+}
+
+.anchor {
+    color: white;
+}
+
+.anchor:visited {
+    color: white;
+}
+
+.main {
+    overflow: scroll;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.main::-webkit-scrollbar {
+    display: none;
+}
+
+.menu {
+    position: fixed;
+    background-color: rgb(242, 244, 246);
+    width: 100%;
+}
+
+.list {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    padding: 0;
+    margin: 0;
+
+    /* height: fit-content;
+    overflow: scroll;
+    scrollbar-width: none;
+    -ms-overflow-style: none; */
+}
+
+.list__item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+    width: 300px;
+    font-size: 1.5rem;
+    padding: 10px;
+    min-height: 200px;
+    color:black
+}
+
+.list__item-text {
+    width: calc(100% - 2rem);
+    height: auto;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    resize: none;
+    overflow: hidden;
+}
+
+.list__item-delete-button {
+    align-self: flex-end;
+    width: 1rem;
+    height: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 0;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.transparent-button {
+    display: flex; 
+    background-color: transparent;  
+    border:none;
+    padding: 0%;
+    width:5%;
+    color:white;
+    align-items: center;
+    justify-content: center;
+    cursor:pointer;
+    }
+    .input::placeholder{
+        color: white;
+    }
