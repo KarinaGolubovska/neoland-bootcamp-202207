@@ -1,0 +1,17 @@
+{
+  "name": "baby-steps",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "pepe":"node ./index.promises.asyn-await.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.1",
+    "mongoose": "^6.5.3",
+    "node": "^16.17.0"
+  }
+}

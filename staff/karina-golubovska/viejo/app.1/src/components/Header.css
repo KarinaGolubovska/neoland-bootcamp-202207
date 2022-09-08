@@ -1,0 +1,12 @@
+.Header {
+    display: flex;
+    background-color: #d8d2d2; 
+}
+.title{
+    letter-spacing: 10px;
+    color: black;
+}
+.imgHeader{
+    height: 80px;
+    width: 80px;
+}
