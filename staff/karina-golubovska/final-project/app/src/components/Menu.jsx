@@ -13,11 +13,8 @@ function Menu({view , onLogoutClick , onSettingsClick}) {
     return <div className='Menu-panel'>
     <ul className="Menu">
             {view !=='settings'&& <li className="Menu__item">
-                <IconButton text="settings" onClick={handleSettingsClick} />
+            <IconButton text="logout" onClick={handleLogoutClick} />
             </li>}
-            <li className="Menu__item">
-                <IconButton text="logout" onClick={handleLogoutClick} />
-            </li>
         </ul>
         </div>
 }

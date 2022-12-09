@@ -1,10 +1,10 @@
 const { connect, disconnect } = require('mongoose')
 const { User } = require('../../../models/schemas')
-const { NotFoundError, AuthError } = require('../../../errors')
-const { authenticateUser } = require('../..')
+const { NotFoundError, AuthError } = require('../../../../../errors')
+const { authenticateUser } = require('../authanticateUser')
 
 describe('authenticateUser', () => {
-    beforeAll(() => connect('mongodb://localhost:27017/postits-test'))
+    beforeAll(() => connect('mongodb://127.0.0.1:27017/withoutname'))
 
     beforeEach(() => User.deleteMany())
 

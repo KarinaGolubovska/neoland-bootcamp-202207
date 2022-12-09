@@ -1,10 +1,10 @@
 const { connect, disconnect } = require('mongoose')
 const { User } = require('../../../models/schemas')
-const { DuplicityError } = require('../../../errors')
-const { registerUser } = require('../..')
+const { DuplicityError } = require('../../../../../validators')
+const { registerUser } = require('../registerUser')
 
 describe('registerUser', () => {
-    beforeAll(() => connect('mongodb://localhost:27017/postits-test'))
+    beforeAll(() => connect('mongodb://127.0.0.1:27017/withoutname'))
 
     beforeEach(() => User.deleteMany())
 
@@ -24,7 +24,7 @@ describe('registerUser', () => {
 
                 const [user] = users
 
-                debugger
+                
 
                 expect(user.name).toEqual(name)
                 expect(user.email).toEqual(email)

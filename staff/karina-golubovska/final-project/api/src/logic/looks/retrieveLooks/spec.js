@@ -1,36 +1,36 @@
 const { connect, disconnect, Types: { ObjectId } } = require('mongoose')
-const { User, Note } = require('../../../models')
-const { NotFoundError } = require('../../../errors')
-const { createNote } = require('../..')
+const { User, Look } = require('../../../models')
+const { NotFoundError } = require('../../../../../errors')
+// const { createNote } = require('../..')
 
 describe('createNote', () => {
-    beforeAll(() => connect('mongodb://localhost:27017/postits-test'))
+    beforeAll(() => connect('mongodb://127.0.0.1:27017/withoutname'))
 
-    beforeEach(() => Promise.all([User.deleteMany(), Note.deleteMany()]))
+    beforeEach(() => Promise.all([User.deleteMany(), Look.deleteMany()]))
 
     it('succeeds on correct data', () => {  // happy path
-        const name = 'Pepito Grillo'
-        const email = 'pepito@grillo.com'
+        const name = 'Karina Golubovska'
+        const email = 'golubov963@gmail.com'
         const password = '123123123'
 
         return User.create({ name, email, password })
             .then(user =>
-                createNote(user.id)
+                createLook(user.id)
                     .then(res => {
                         expect(res).toBeUndefined()
 
-                        return Note.find()
+                        return Look.find()
                     })
-                    .then(notes => {
-                        expect(notes).toHaveLength(1)
+                    .then(looks => {
+                        expect(looks).toHaveLength(1)
 
-                        const [note] = notes
+                        const [look] = looks
 
-                        expect(note.user.toString()).toEqual(user.id)
-                        expect(note.text).toEqual('')
-                        expect(note.visibility).toEqual('private')
-                        expect(note.createAt).toBeInstanceOf(Date)
-                        expect(note.modifiedAt).toBeUndefined()
+                        expect(look.user.toString()).toEqual(user.id)
+                        expect(look.photo).toEqual('')
+                        expect(look.visibility).toEqual('private')
+                        expect(look.createAt).toBeInstanceOf(Date)
+                        expect(look.modifiedAt).toBeUndefined()
                     })
             )
 
@@ -39,7 +39,7 @@ describe('createNote', () => {
     it('fails on non-existing user', () => {  // unhappy path
         const userId = new ObjectId().toString()
 
-        return createNote(userId)
+        return createLook(userId)
             .catch(error => {
                 expect(error).toBeInstanceOf(NotFoundError)
                 expect(error.message).toEqual(`user with id ${userId} not found`)

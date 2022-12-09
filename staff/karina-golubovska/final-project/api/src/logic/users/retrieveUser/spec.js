@@ -1,11 +1,11 @@
 const {connect, disconnect , Types: {ObjectId} } = require('mongoose')
 const {User}=require('../../../models')
-const {NotFoundError}=require('../../../errors')
-const {retrieveUser}=require('../..')
+const {NotFoundError}=require('../../../../../errors/src')
+const {retrieveUser}=require('.')
 const { describe } = require('node:test')
 
 describe('retrieveUser', ()=> {
-    beforeAll(()=> connect('mongodb://localhost:27017/postits-test'))
+    beforeAll(()=> connect('mongodb://127.0.0.1:27017/withoutname'))
     beforeEach(()=>User.deleteMany())
 
     it('succeeds on existing user', () => {  

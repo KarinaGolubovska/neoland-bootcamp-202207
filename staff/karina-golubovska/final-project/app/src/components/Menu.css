@@ -1,18 +1,21 @@
 .Menu {
-
     list-style: none;
-    width: 150px;
+   
+    
 }
 .Menu-panel{
-    position: fixed;
-    top: 100px;
-    border-radius: 180%;
+    position:fixed;
+    top: 150px;
     gap: 10px;
-    width: 130px;
-    left:900px;
-    height: 130px;
-    background-color:#f9e68e;
-    border-style: dashed;
-    border-color: black;
+    width: 100px;
+    left:700px; 
+    height: 50px;
+    background-color: #EBEBEB;
+    border-radius: 20px;
+    border-left: 1px solid rgba(255, 255, 255, 0.3);
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+    -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+    box-shadow: 20px 20px 40px -6px rgba(0, 0, 0, 0.2);
 
 }

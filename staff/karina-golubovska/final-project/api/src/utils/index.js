@@ -1,6 +1,6 @@
 module.exports = {
     createLogger: require('./createLogger'),
-    verifyObjectId: require('./verifyObjectIdString'),
+    verifyObjectIdString: require('./verifyObjectIdString'),
     verifyToken: require('./verifyToken'),
     runWithErrorHandling: require('./runWithErrorHandling')
 }

@@ -1,21 +1,38 @@
 const { Schema, Types: { ObjectId } } = require('mongoose')
+const item = require('./item')
 
-const note = new Schema({
+const look = new Schema({
     user: {
         type: ObjectId,
         required: true,
         ref: 'User'
     },
 
-    text: {
+    title: {
         type: String,
-        default: ''
+        required: true
     },
+
+    description: {
+        type: String
+    },
+
+    photo: {
+        type: String,
+        required: true
+    },
+
     visibility: {
         type: String,
         enum: ['private', 'public'],
-        default: 'private'
+        default: 'public'
     },
+
+    items: [item],
+
+    // SubmitEvent: {
+    // type: String,
+    // },
 
     createAt: {
         type: Date,
@@ -24,7 +41,11 @@ const note = new Schema({
 
     modifiedAt: {
         type: Date
-    }
+    },
+    favorites:{
+        type:[ObjectId],
+        ref: 'User'
+    },
 })
 
-module.exports = note
+module.exports = look

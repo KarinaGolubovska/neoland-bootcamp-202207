@@ -1,19 +1,20 @@
-const {User} = require('../../../models')
-const {NotFoundError , SystemError} = require('../../../errors')
-const {validateObject} = require ('../../../validators')
+const { User } = require('../../../models')
+const { NotFoundError, SystemError } = require('../../../../../errors/src')
+const { verifyObjectIdString } = require('../../../utils')
 
 function retrieveUser(userId) {
-    validateObject(userId , 'user id')
-   
+    verifyObjectIdString(userId, 'user id')
 
-    return User.findById(userId, 'name email').lean()
-    .catch(error=>{
-        throw new SystemError(error.message)
-    })
-    .then(user => {
-        if(!user) throw new NotFoundError(`user with id ${userId}not found`)
-        delete user._id
-        return user
-    })
+
+    return User.findById(userId, 'name email photo').lean()
+        .catch(error => {
+            throw new SystemError(error.message)
+        })
+        .then(user => {
+            if (!user) throw new NotFoundError(`user with id ${userId}not found`)
+            delete user._id
+
+            return user
+        })
 }
 module.exports = retrieveUser

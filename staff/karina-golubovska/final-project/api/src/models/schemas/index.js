@@ -1,4 +1,5 @@
 module.exports = {
     user: require('./user'),
-    look: require('./look')
+    look: require('./look'),
+    item: require('./item')
 }

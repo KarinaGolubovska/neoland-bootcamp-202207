@@ -1,4 +1,4 @@
-const { validateText } = require('../validators')
+const { validateText } = require('../../../../final-project/validators/src')
 const { verify } = require('jsonwebtoken')
 
 function verifyToken(req) {

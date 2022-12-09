@@ -1,74 +1,53 @@
-import {EMAIL_REGEX} from './constants'
+
+import { validateEmail, validatePassword, validateCallback } from 'validators'
+import { AuthError, ClientError, ServerError, UnknownError } from 'errors'
+
+const API_URL = process.env.REACT_APP_API_URL
+
 function authenticateUser(email, password, callback) {
-    if (typeof email !== 'string') throw new TypeError('email is not a string')
-    if (email.trim().length === 0) throw new Error('email is empty')
-    if (email.length < 6) throw new Error('email lenght not valid')
-    if (!EMAIL_REGEX.test(email)) throw new Error('email is not valid')
-
-    if (typeof password !== 'string') throw new TypeError('password is not a string')
-    if (password.trim().length === 0) throw new Error('password is empty')
-    if (password.length < 8) throw new Error('password lenght is less than 8 characters ')
-
-    if (typeof callback !== 'function') throw new TypeError('callback is not a function')
+    validateEmail(email)
+    validatePassword(password)
+    validateCallback(callback)
 
     const xhr = new XMLHttpRequest
+
+    // response
+
     xhr.onload = function () {
         const status = xhr.status
-        if (status >= 500)
-            callback(new Error(`server error (${status})`))
-        else if (status >= 400)
-            callback(new Error(`client error (${status})`))
-        else if (status === 200) {
-            const json = xhr.responseText
-            
-            const data = JSON.parse(json)
 
-            const token = data.token
+        const json = xhr.responseText
 
-            callback(null, token)
+        const { error, token } = JSON.parse(json)
+
+        switch(true) {
+            case (status >= 500):
+                callback(new ServerError(error))
+                break
+            case (status === 401):
+                callback(new AuthError(error))
+                break
+            case (status >= 400): 
+                callback(new ClientError(error))
+                break
+            case (status === 200):
+                callback(null, token)
+                break
+            default:
+                callback(new UnknownError(`unexpected status ${status}`))
         }
     }
-    xhr.open('POST', 'https://b00tc4mp.herokuapp.com/api/v2/users/auth')
+
+    xhr.onerror = function() {
+        callback(new ServerError('connection failed'))
+    }
+    xhr.open('POST', `${API_URL}/users/auth`)
 
     xhr.setRequestHeader('Content-type', 'application/json')
 
-    xhr.send(`{ "username": "${email}", "password": "${password}"}`)
+    xhr.send(`{ "email": "${email}", "password": "${password}"}`)
 
 }
 export default authenticateUser
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*const user = users.find(function (user) {
-    return user.email === email && user.password === password
-})
-
-if (!user) {
-    callback(new Error('wrong credentials'))
-
-    return
-}
-
-callback(null)
-*/

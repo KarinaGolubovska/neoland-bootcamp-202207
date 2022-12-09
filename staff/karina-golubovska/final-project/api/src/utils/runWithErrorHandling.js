@@ -1,5 +1,5 @@
 const { JsonWebTokenError, TokenExpiredError, NotBeforeError } = require('jsonwebtoken')
-const { FormatError, NotFoundError, AuthError, DuplicityError } = require('../errors')
+const { FormatError, NotFoundError, AuthError, DuplicityError } = require('../../../errors/src')
 
 function runWithErrorHandling(callback, res, logger) {
     try {

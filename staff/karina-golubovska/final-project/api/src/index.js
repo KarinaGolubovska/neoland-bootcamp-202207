@@ -1,20 +1,28 @@
+require('dotenv').config()
+
+const cors = require('cors')
 const { connect, disconnect } = require('mongoose')
 const { createLogger } = require('./utils')
 const logger = createLogger(module)
+const { env: { MONGO_URL, PORT } } = process
 
-connect('mongodb://localhost:27017/postits')
+connect(MONGO_URL)
     .then(() => {
-        logger.info('db connected')
+        logger.info('db connected to ' + MONGO_URL)
 
         const express = require('express')
 
         const api = express()
 
+        api.get('/hello', (req, res) => res.send('hello world!'))
+
         const { usersRouter, looksRouter } = require('./routes')
+
+        api.use(cors())
 
         api.use('/api', usersRouter, looksRouter)
 
-        api.listen(8080, () => logger.info('api started'))
+        api.listen(PORT, () => logger.info('api started'))
 
         process.on('SIGINT', () => {
             if (!process.stopped) {
@@ -32,6 +40,5 @@ connect('mongodb://localhost:27017/postits')
         })
     })
     .catch(error => {
-        debugger
         logger.error(error)
     })

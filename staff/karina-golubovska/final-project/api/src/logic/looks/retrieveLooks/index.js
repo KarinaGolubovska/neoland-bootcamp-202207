@@ -1,9 +1,10 @@
-const { User, Note } = require('../../../models')
-const { NotFoundError, SystemError } = require('../../../errors')
-const { validateObjectId } = require('../../../validators')
+const { User, Look } = require('../../../models')
+const { NotFoundError, SystemError } = require('../../../../../errors/src')
+const { verifyObjectIdString } = require('../../../utils')
+
 
 function retriveLooks(userId) {
-    validateObjectId(userId, 'user id')
+    verifyObjectIdString(userId, 'user id')
 
     return User.findById(userId).lean()
         .catch(error => {
@@ -12,13 +13,28 @@ function retriveLooks(userId) {
         .then(user => {
             if (!user) throw new NotFoundError(`user with id ${userId} not found`)
 
-            return Note.create({ user: user._id })
+            return Look.find({ user: user._id }).lean()
                 .catch(error => {
                     throw new SystemError(error.message)
                 })
+                .then(looks => {
+                    
+                    looks.forEach(look => {
+                        look.id = look._id.toString()
+                        delete look._id
+                        delete look.__v
+
+                        look.items.forEach(item => {
+                            item.id = item._id.toString()
+                            delete item._id
+                            delete item.__v
+                        })
+                    })
+
+                    return looks
+                })
         })
-        .then(note => { })
-    // це для того щоб зробити тест 
+
 
 }
 module.exports = retriveLooks
