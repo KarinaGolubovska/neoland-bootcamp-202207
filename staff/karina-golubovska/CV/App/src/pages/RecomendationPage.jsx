@@ -5,34 +5,28 @@ import IconButton from '../components/IconButton'
 import withContext from '../utils/withContext'
 import Search from '../components/Search'
 import searchLooks from '../logic/searchLooks'
-import toggleFavorites from '../logic/toggleFavorites'
-import { useNavigate, useLocation } from 'react-router-dom'
+
+
+
+
+
+
+
+import {  useNavigate, useLocation } from 'react-router-dom'
 // import { users } from '../logic/'
 function RecomendationPage({ }) {
     const logger = new Loggito('RecomendationPage')
+
     const [looks, setLooks] = useState(null)
     const navigate = useNavigate()
     const [query, setQuery] = useState(null);
     const [showItems, setShowItems] = useState(false)
     const location = useLocation()
+    
 
-    const handleFavoriteClick = (lookId) => {
-        try {
-            toggleFavorites(sessionStorage.token, lookId, (error) => {
-                if (error) {
-                    alert(error.message)
+    useEffect(() => {
+        logger.info("on query changed");
 
-                    return
-                }
-
-                doSearch()
-            })
-        } catch (error) {
-            alert(error.message)
-        }
-    }
-
-    const doSearch = () => {
         try {
             searchLooks(sessionStorage.token, query, (error, looks) => {
                 if (error) {
@@ -48,19 +42,14 @@ function RecomendationPage({ }) {
                 logger.debug("setLooks", looks);
             });
         } catch (error) {
+
             logger.warn(error.message);
         }
-    }
-
-    useEffect(() => {
-        logger.info("on query changed");
-
-        doSearch()
     }, [query]);
 
-    const handleGoToFavoritesClick = () => {
-        navigate('favorites')
-        logger.debug('navigate to favorites')
+    const handleFavouriteClick = () => {
+        navigate('favourites')
+        logger.debug('navigate to favourites')
 
     }
     const handleAccountClick = () => {
@@ -72,11 +61,9 @@ function RecomendationPage({ }) {
 
         setShowItems(true)
     }
-
+    
     logger.info('return')
     const handleSearch = (query) => setQuery(query);
-
-
 
     return <div>
 
@@ -89,24 +76,22 @@ function RecomendationPage({ }) {
                 {looks && looks.map((look) => {
                     return <li className='list_looks' key={look.id} >
                         <div>
-                            <img className="found_look" alt='look' src={look.photo} />
-                            {showItems && look.items && look.items.map((item, index) => {
-                                return <a className="item" style={{ left: item.coords[0], bottom: item.coords[1] }} href={item.url}>{index}</a>
-                            })}
+                        <img className="found_look"alt='look' src={look.photo} />
+                         {showItems && look.items.map((item, index) => {
+                            return <a className="item" style={{ left: item.coords[0], bottom: item.coords[1] }} href={item.url}>{index}</a>})}
                         </div>
                         <div>
-                            <button className='show-items' onClick={handleShowItems}>{showItems ? 'Hide ' : 'Show'}</button>
-                            <IconButton text={look.isFav ? 'favorite' : '´no favorite'} className="transparent-account-buttom" onClick={() => handleFavoriteClick(look.id)} />
+                        <button className='show-items'onClick={handleShowItems}>{showItems ? 'Hide ' : 'Show'}</button>  
                         </div>
                     </li>
                 })}
-
+                
             </main>
             <footer className="footer">
                 {/* {location.pathname === '/looks' && <IconButton text='home' className="transparent-home--buttom" onClick={handleLookRecomendationClick} />} */}
                 {location.pathname === '/looks' && <IconButton text='Account_Circle' className="transparent-account-buttom" onClick={handleAccountClick} />}
-                {location.pathname === '/looks' && <IconButton text='favorite' className="transparent-account-buttom" onClick={handleGoToFavoritesClick} />}
-            </footer>
+                {location.pathname === '/looks' && <IconButton text='favorite' className="transparent-account-buttom" onClick={handleFavouriteClick} />}
+            </footer> 
 
 
         </div>

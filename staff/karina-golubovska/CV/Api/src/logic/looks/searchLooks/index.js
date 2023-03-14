@@ -25,13 +25,14 @@ function searchLooks(userId, query) {
                     { "items.description": { $regex: criteria } },
                     { "items.category": { $regex: criteria } }
                 ]
-            }, 'title description visibility photo createdAt modifiedAt items favorites').lean()
+            }, 'title description visibility photo createdAt modifiedAt').lean()
                 .catch(error => {
                     throw new SystemError(error.message)
                 })
         })
         .then(looks => {
             looks.forEach(look => {
+
                 look.id = look._id.toString()
 
                 delete look.description
@@ -39,8 +40,6 @@ function searchLooks(userId, query) {
                 delete look._id
 
                 delete look.__v
-
-                look.isFav = look.favorites.some(favUserId => favUserId.toString() === userId)
             })
 
             return looks

@@ -1,6 +1,6 @@
 module.exports = {
     retrieveLooks: require('./retrieveLooks'),
     searchLooks: require('./searchLooks'),
-    addFavoriteLook: require('./addFavoriteLook'),
+    toggleFavoriteLook: require('./toggleFavoriteLook'),
     retrieveFavoriteLooks: require('./retrieveFavoriteLooks')
 }

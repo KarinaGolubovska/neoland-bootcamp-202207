@@ -18,6 +18,7 @@ function retriveLooks(userId) {
                     throw new SystemError(error.message)
                 })
                 .then(looks => {
+                    // sanitize
 
                     looks.forEach(look => {
                         look.id = look._id.toString()
@@ -29,12 +30,6 @@ function retriveLooks(userId) {
                             delete item._id
                             delete item.__v
                         })
-
-                        // si el look contiene al user id en favorites entonces poner true en isFav, y si no, poner false
-
-                        look.isFav = look.favorites.some(favUserId => favUserId.toString() === userId)
-
-
                     })
 
                     return looks

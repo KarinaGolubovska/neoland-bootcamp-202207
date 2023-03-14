@@ -11,10 +11,12 @@ import LookModal from "./LookModal"
 
 
 
+
 function Favorites({ context: { handleFeedback }, favorites, }) {
   const logger = new Loggito('FavList')
   const navigate = useNavigate()
   const [look, setLook] = useState();
+  
 
 
   logger.info('render')

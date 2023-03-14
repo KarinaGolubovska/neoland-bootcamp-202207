@@ -1,9 +1,9 @@
-const addFavoriteLookHandler = require('./addFavoriteLookHandler');
+const toggleFavoriteLookHandler = require('./toggleFavoriteLookHandler');
 
 module.exports = {
     retrieveLooksHandler: require('./retrieveLooksHandler'),
     searchLooksHandler: require('./searchLooksHandler'),
-    addFavoriteLookHandler: require('./addFavoriteLookHandler'),
+    toggleFavoriteLookHandler: require('./toggleFavoriteLookHandler'),
     //uploadImageHandler: require('./uploadImageHandler'),
     retrieveFavoriteLooksHandler: require('./retrieveFavoriteLooksHandler')
 }

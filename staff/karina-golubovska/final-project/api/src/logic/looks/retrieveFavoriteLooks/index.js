@@ -6,7 +6,7 @@ const { mongoose } = require("mongoose")
 
 function retrieveFavoriteLooks(userId) {
   verifyObjectIdString(userId, "user id");
-
+  
   return User.findById(userId).populate('favorites')
     .lean()
     .catch((error) => {
